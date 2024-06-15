@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: MIT
+pragma solidity^ 0.8.0 ;
+
+contract Admin{
+    address private Value;
+    uint public sum;
+
+    modifier owner() {
+       require(msg.sender == Value,"admin can call Function");
+       _;
+    }
+
+       constructor(){
+        Value=msg.sender;
+        sum=0;
+
+       }
+function increment() public owner {
+    sum=sum+2;
+}
+function returvalue() public view owner returns (uint)
+{
+    return sum;
+}
+function newowner () public view returns (bool) {
+    return msg.sender == Value;
+}
+  }
