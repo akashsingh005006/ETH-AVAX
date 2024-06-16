@@ -1,0 +1,36 @@
+// SPDX-License-Identifier: MIT
+pragma solidity^ 0.8.7;
+
+contract smartChallenge2{
+    uint private Value;
+
+    event changedValue(uint newvalue);
+
+    function returnvalue() public view returns (uint) {
+        return Value;
+    }
+
+    function multiply  (uint x,uint y) public pure returns (uint){
+        return x*y;
+    }
+
+    function debit() public payable  {
+        emit changedValue(address(this).balance);
+    }
+
+    function returnstoredvalue(uint Number) internal {
+        Value =Number;
+      emit changedValue(Value);
+    }
+
+}
+
+contract newContract is smartChallenge2{
+    function derivedValue(uint Number) public {
+        returnstoredvalue(Number);
+    }
+
+    function getBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+}
