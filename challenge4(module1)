@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.7;
+
+contract SmartContract {
+    address private sender;
+    uint public amount;
+
+    modifier owner() {
+        require(msg.sender== sender,"action performed by contract only");
+        _;
+    }
+constructor() {
+    sender=msg.sender;
+    amount=0;
+}
+
+function deposit() public payable {
+    amount=amount+msg.value;
+}
+
+function credit(uint remainBalance) public owner {
+    require(remainBalance<= amount,"insufficient balance");
+    payable(msg.sender).transfer(remainBalance);
+    amount=amount-remainBalance;
+}
+
+function updatedbalance() public view returns (uint)
+{
+    return amount;
+}
+} 
