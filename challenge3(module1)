@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Trigger {
+    uint private parcel;
+
+    event parcelTaken(address indexed sender,uint indexed parcelID,uint pincode);
+    event parcelSend(address indexed from ,address indexed to ,uint parcelId);
+    event parcelReceived(uint indexed parcelId,address indexed friend);
+
+           constructor(uint pincode){
+            emit parcelTaken(msg.sender,++parcel, pincode);
+           }
+
+           function Takeparcel(uint pincode) public {
+            emit parcelTaken(msg.sender, ++parcel, pincode);
+           }
+
+           function sendParcel(address to ,uint parcelId) public {
+            require(to!=address(0),"unknown");
+            emit parcelSend(msg.sender, to, parcelId);
+           }
+
+           function ReceiveParcel(uint parcelId,address friend) public {
+            require(friend != address(0),"unknown");
+            emit parcelReceived(parcelId, friend);
+           }
+    } 
