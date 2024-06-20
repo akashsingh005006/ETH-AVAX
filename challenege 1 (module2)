@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^ 0.8.7;
+
+contract Storage {
+    uint public value; 
+    
+
+    constructor() {
+        value=0;
+    }
+
+    function storedValue(uint newValue) public {
+        value = newValue;
+    }
+
+    function calculateSum(uint a, uint b) public pure returns (uint){
+ uint  result = a + b;
+  return result;
+    }
+}
